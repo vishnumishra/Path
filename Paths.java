@@ -20,26 +20,38 @@ class Destination{
 	}
 }
 
+class isPresent{
+	public static boolean element(Map<Source,Destination>db,String src){
+		boolean result = false ;
+		for(Source s :db.keySet())
+			if(s.toString().equals(new Source(src).toString())) result = true;
+		for(Source v :db.keySet()) 
+			if(db.get(v).toString().equals(new Source(src).toString())) result = true;
+		return result;
+	}
+}
+
+
 class DataBase{
-	static Map<String,String> db = new  HashMap<String,String>();
-	public static Map<String,String> initDataBase(){
-		db.put(new String("Bangalore"),new String("Singapore"));
-		db.put(new String("Singapore"),new String("Seoul"));
-		db.put(new String("Singapore"),new String("Dubai"));
-		db.put(new String("Seoul"),new String("Beijing"));
-		db.put(new String("Beijing"),new String("Tokyo"));
+	static Map<Source,Destination> db = new  HashMap<Source,Destination>();
+	public static Map<Source,Destination> initDataBase(){
+		db.put(new Source("Bangalore"),new Destination("Singapore"));
+		db.put(new Source("Singapore"),new Destination("Seoul"));
+		db.put(new Source("Singapore"),new Destination("Dubai"));
+		db.put(new Source("Seoul"),new Destination("Beijing"));
+		db.put(new Source("Beijing"),new Destination("Tokyo"));
 		return db;
 	}
 }
 
 public  class Paths{
-	static Map<String,String> db = DataBase.initDataBase();
+	static Map<Source,Destination> db = DataBase.initDataBase();
 	public static String isDirectFlight(String src,String dest){
-		if(!(db.containsKey(src) ||db.containsValue(src) )) return "No city named '"+src+"' in database";
-		if(!(db.containsKey(dest)||db.containsValue(dest))) return "No city named '"+dest+"' in database";
 
-		for (String s :db.keySet() ) {
-			if(s.equals(src) && db.get(s).equals(dest))
+		if(!isPresent.element(db,src)) return "No city named '"+src+"' in database";
+		if(!isPresent.element(db,dest)) return "No city named '"+dest+"' in database";
+		for(Source s :db.keySet()) {
+			if(s.toString() == src && db.get(s).toString() == dest)
 				return "true";
 		}
 		return  "false";
