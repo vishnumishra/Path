@@ -1,35 +1,5 @@
 import java.util.*;
 
-// class City{
-// 	String src;
-// 	String dest;
-// 	public City(String src,String dest){
-// 		this.src = src; 
-// 		this.dest = dest; 
-// 	}
-// 	public String toString(){
-// 		return src+","+dest;
-// 	}
-
-// 	// public Destination(String dest){
-// 	// }
-// 	// public String toString(){
-// 	// 	return dest;
-// 	// }
-// }
-
-// class isPresent{
-// 	public static boolean element(Map<Source,Destination>db,String src){
-// 		for(Source s :db.keySet()){
-// 			if(s.toString().equals(src)) return true;
-// 			if(db.get(s).toString().equals(src)) return true;
-// 		}
-// 		return false;
-// 	}
-// }
-
-
-
 class DataBase{
 	static Map<String,List<String>> db = new  HashMap<String,List<String>>();
 	public static Map<String,List<String>> initDataBase(){
