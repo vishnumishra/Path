@@ -35,31 +35,27 @@ class isPresent{
 }
 
 class Flight{
-	static  boolean res =  false;
-	public static boolean anyFlight(Map<String,List<String>> db,String src,String dest){
-		List<String> list = db.get(src);
-		if(list != null){
-			if(list.contains(dest)){
-				return true;
-			}
-			for (String s : list ) {
-				res = anyFlight(db,s,dest);
-				if(res) return true;	
-			}
-		}
-		return false;
-	}
 }
 
 public  class Paths{
 	static Map<String,List<String>> db = DataBase.initDataBase();
 	public static boolean isDirectFlight(String src,String dest)throws Exception{
+	boolean res =  false;
+		if(!isPresent.src(db,src))
+			throw new Exception("No city named '"+src+"' in database");
+		if(!isPresent.src(db,dest))
+			throw new Exception("No city named '"+dest+"' in database");
+		List<String> list = db.get(src);
 
-		// if(!isPresent.src(db,src))
-		// 	throw new Exception("No city named '"+src+"' in database");
-		// if(!isPresent.src(db,dest))
-		// 	throw new Exception("No city named '"+dest+"' in database");
-		// System.out.println(Flight.anyFlight(db,src,dest));
-		return Flight.anyFlight(db,src,dest);
+		if(list != null){
+			if(list.contains(dest)){
+				return true;
+			}
+			for (String s : list ) {
+				res = isDirectFlight(s,dest);
+				if(res) return true;	
+			}
+		}
+		return false;
 	}
 }
