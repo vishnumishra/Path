@@ -12,11 +12,14 @@ class DataBase{
 		seoul.add("Beijing");
 		List<String> beijing = new ArrayList<String>();
 		beijing.add("Tokyo");
+		List<String> dubai = new ArrayList<String>();
+		dubai.add("Finland");
 
 		db.put("Bangalore",bangalore);
 		db.put("Singapore",singapore);
 		db.put("Seoul",seoul);
 		db.put("Beijing",beijing);
+		db.put("Dubai",dubai);
 		return db;
 	}
 }
@@ -31,18 +34,32 @@ class isPresent{
 	}
 }
 
+class Flight{
+	static  boolean res =  false;
+	public static boolean anyFlight(Map<String,List<String>> db,String src,String dest){
+		List<String> list = db.get(src);
+		if(list != null){
+			if(list.contains(dest)){
+				return true;
+			}
+			for (String s : list ) {
+				res = anyFlight(db,s,dest);
+				if(res) return true;	
+			}
+		}
+		return false;
+	}
+}
+
 public  class Paths{
 	static Map<String,List<String>> db = DataBase.initDataBase();
 	public static boolean isDirectFlight(String src,String dest)throws Exception{
-		if(!isPresent.src(db,src)){
-			throw new Exception("No city named '"+src+"' in database");
-		}
-		if(!isPresent.src(db,dest)){
-			throw new Exception("No city named '"+dest+"' in database");
-		}
 
-		if(db.get(src).contains(dest))
-			return true;
-		return  false;
+		// if(!isPresent.src(db,src))
+		// 	throw new Exception("No city named '"+src+"' in database");
+		// if(!isPresent.src(db,dest))
+		// 	throw new Exception("No city named '"+dest+"' in database");
+		// System.out.println(Flight.anyFlight(db,src,dest));
+		return Flight.anyFlight(db,src,dest);
 	}
 }

@@ -10,11 +10,21 @@ public class PathsTest{
 		assertEquals(true,predicate);
 	}
 	@Test
-	public void paths_tell_that_their_is_direct_path_or_not_01()throws Exception{
+	public void paths_tell_that_their_any_path_or_not_01()throws Exception{
 		boolean predicate = Paths.isDirectFlight("Bangalore","Tokyo");
-		assertEquals(false,predicate);
+		assertEquals(true,predicate);
 	}
-	
+	@Test
+	public void paths_tell_that_their_any_path_or_not_02()throws Exception{
+		boolean predicate = Paths.isDirectFlight("Bangalore","Finland");
+		assertEquals(true,predicate);
+	}
+	@Test
+	public void paths_tell_that_their_any_path_or_not_03()throws Exception{
+		boolean predicate = Paths.isDirectFlight("Finland","Bangalore");
+		assertFalse(predicate);
+	}
+
 	@Test
 	public void paths_tell_if_the_city_no_present_in_data_base(){
 	 	Map<String,List<String>> db = DataBase.initDataBase();
@@ -30,5 +40,4 @@ public class PathsTest{
 	 	Map<String,List<String>> db = DataBase.initDataBase();
 		assertEquals(isPresent.src(db,"Chennai"),false);
 	}
-
 }
