@@ -34,12 +34,9 @@ class isPresent{
 	}
 }
 
-class Flight{
-}
-
 public  class Paths{
 	static Map<String,List<String>> db = DataBase.initDataBase();
-	public static boolean isDirectFlight(String src,String dest)throws Exception{
+	public static boolean anyPath(String src,String dest)throws Exception{
 	boolean res =  false;
 		if(!isPresent.src(db,src))
 			throw new Exception("No city named '"+src+"' in database");
@@ -52,7 +49,7 @@ public  class Paths{
 				return true;
 			}
 			for (String s : list ) {
-				res = isDirectFlight(s,dest);
+				res = anyPath(s,dest);
 				if(res) return true;	
 			}
 		}

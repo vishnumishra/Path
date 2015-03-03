@@ -5,23 +5,23 @@ import static org.junit.Assert.*;
 public class PathsTest{
 
 	@Test
-	public void paths_tell_that_their_is_direct_path_or_not()throws Exception{
-		boolean predicate = Paths.isDirectFlight("Bangalore","Singapore");
+	public void paths_tell_that_are_any_path_btwn_Bangalore_to_Singapore()throws Exception{
+		boolean predicate = Paths.anyPath("Bangalore","Singapore");
 		assertEquals(true,predicate);
 	}
 	@Test
-	public void paths_tell_that_their_any_path_or_not_01()throws Exception{
-		boolean predicate = Paths.isDirectFlight("Bangalore","Tokyo");
+	public void paths_tell_that_their_any_path_btwn_Bangalore_to_Tokyo()throws Exception{
+		boolean predicate = Paths.anyPath("Bangalore","Tokyo");
 		assertEquals(true,predicate);
 	}
 	@Test
-	public void paths_tell_that_their_any_path_or_not_02()throws Exception{
-		boolean predicate = Paths.isDirectFlight("Bangalore","Finland");
+	public void paths_tell_that_their_any_path_From_Bangalore_to_Finland()throws Exception{
+		boolean predicate = Paths.anyPath("Bangalore","Finland");
 		assertEquals(true,predicate);
 	}
 	@Test
-	public void paths_tell_that_their_any_path_or_not_03()throws Exception{
-		boolean predicate = Paths.isDirectFlight("Finland","Bangalore");
+	public void paths_tell_that_their_any_path_From_Finland_to_Bangalore()throws Exception{
+		boolean predicate = Paths.anyPath("Finland","Bangalore");
 		assertFalse(predicate);
 	}
 

@@ -3,7 +3,7 @@ public class Main{
 		System.out.println(args[0]+" "+args[1]);
 
 		try{
-			boolean result = Paths.isDirectFlight(args[0].toString(),args[1].toString());
+			boolean result = Paths.anyPath(args[0].toString(),args[1].toString());
 			System.out.println(result);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
