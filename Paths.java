@@ -4,15 +4,16 @@ class DataBase{
 	static Map<String,List<String>> db = new  HashMap<String,List<String>>();
 	public static Map<String,List<String>> initDataBase(){
 		List<String> bangalore = new ArrayList<String>();
-		bangalore.add("Singapore");
 		List<String> singapore = new ArrayList<String>();
-		singapore.add("Seoul");
-		singapore.add("Dubai");
 		List<String> seoul = new ArrayList<String>();
-		seoul.add("Beijing");
 		List<String> beijing = new ArrayList<String>();
-		beijing.add("Tokyo");
 		List<String> dubai = new ArrayList<String>();
+	
+		bangalore.add("Singapore");
+		singapore.add("Dubai");
+		singapore.add("Seoul");
+		seoul.add("Beijing");
+		beijing.add("Tokyo");
 		dubai.add("Finland");
 
 		db.put("Bangalore",bangalore);
@@ -25,7 +26,7 @@ class DataBase{
 }
 
 class isPresent{
-	public static boolean src(Map<String,List<String>> db,String src ){
+	public static boolean city(Map<String,List<String>> db,String src ){
 		if(db.containsKey(src)) return true;
 		for (String s :db.keySet()) {
 			if(db.get(s).contains(src)) return true;
@@ -35,24 +36,34 @@ class isPresent{
 }
 
 public  class Paths{
-	static Map<String,List<String>> db = DataBase.initDataBase();
-	public static boolean anyPath(String src,String dest)throws Exception{
-	boolean res =  false;
-		if(!isPresent.src(db,src))
-			throw new Exception("No city named '"+src+"' in database");
-		if(!isPresent.src(db,dest))
-			throw new Exception("No city named '"+dest+"' in database");
-		List<String> list = db.get(src);
+	static  Map<String,List<String>> db = DataBase.initDataBase();
+    private static Set<String> intermediateCitys = new HashSet<String>();
+    private static boolean hasPath(String src, String dest){
+        List<String> list = db.get(src);
+        intermediateCitys.add(src);
+        if(list == null) return false;
+        if (list.contains(dest) || src == dest){
+            intermediateCitys.add(dest);
+            return true;
+        }
+        for (String city:list) {
+            intermediateCitys.add(city);
+            if (hasPath(city, dest)) return true;   
+        }
+    	return false;
+    }
 
-		if(list != null){
-			if(list.contains(dest)){
-				return true;
-			}
-			for (String s : list ) {
-				res = anyPath(s,dest);
-				if(res) return true;	
-			}
-		}
-		return false;
-	}
+    public  static boolean hasAnyPath(String src, String dest)throws Exception{
+        if(!isPresent.city(db,src))
+            throw new Exception("No city named \""+src+"\" in database");
+        if(!isPresent.city(db,dest))
+            throw new Exception("No city named \""+dest+"\" in database");
+        return (hasPath(src,dest))?true:hasPath(dest,src);
+    }
+
+    public static String getPath(String src,String dest)throws Exception{
+    	if(hasAnyPath(src,dest))
+    		return intermediateCitys.toString();
+    	return "Sorry no path";
+    }
 }

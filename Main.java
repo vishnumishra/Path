@@ -1,9 +1,11 @@
 public class Main{
 	public static void main(String[] args) {
-		System.out.println(args[0]+" "+args[1]);
-
+		if(args.length<2){
+			System.out.println("please provide two arguments 1.source and 2.destination");
+			System.exit(1);
+		}
 		try{
-			boolean result = Paths.anyPath(args[0].toString(),args[1].toString());
+			String result = Paths.getPath(args[0].toString(),args[1].toString());
 			System.out.println(result);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
