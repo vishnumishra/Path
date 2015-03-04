@@ -1,32 +1,20 @@
 import java.util.*;
 
-class DataBase{
-	static Map<String,List<String>> db = new  HashMap<String,List<String>>();
-	public static Map<String,List<String>> initDataBase(){
-		List<String> bangalore = new ArrayList<String>();
-		List<String> singapore = new ArrayList<String>();
-		List<String> seoul = new ArrayList<String>();
-		List<String> beijing = new ArrayList<String>();
-		List<String> dubai = new ArrayList<String>();
-	
-		bangalore.add("Singapore");
-		singapore.add("Dubai");
-		singapore.add("Seoul");
-		seoul.add("Beijing");
-		beijing.add("Tokyo");
-		dubai.add("Finland");
-
-		db.put("Bangalore",bangalore);
-		db.put("Singapore",singapore);
-		db.put("Seoul",seoul);
-		db.put("Beijing",beijing);
-		db.put("Dubai",dubai);
-		return db;
+class MyDataBase{
+	public static Map<String,ArrayList<String>> initDataBase(){
+		DataBase db = new DataBase(); 
+		db.insert("Bangalore","Singapore");
+		db.insert("Singapore","Dubai");
+		db.insert("Singapore","Seoul");
+		db.insert("Seoul","Beijing");
+		db.insert("Beijing","Tokyo");
+		db.insert("Dubai","Finland");
+		return db.data;
 	}
 }
 
 class isPresent{
-	public static boolean city(Map<String,List<String>> db,String src ){
+	public static boolean city(Map<String,ArrayList<String>> db,String src ){
 		if(db.containsKey(src)) return true;
 		for (String s :db.keySet()) {
 			if(db.get(s).contains(src)) return true;
@@ -36,10 +24,10 @@ class isPresent{
 }
 
 public  class Paths{
-	static  Map<String,List<String>> db = DataBase.initDataBase();
+	static  Map<String,ArrayList<String>> db = MyDataBase.initDataBase();
     private static Set<String> intermediateCitys = new HashSet<String>();
     private static boolean hasPath(String src, String dest){
-        List<String> list = db.get(src);
+        ArrayList<String> list = db.get(src);
         intermediateCitys.add(src);
         if(list == null) return false;
         if (list.contains(dest) || src == dest){

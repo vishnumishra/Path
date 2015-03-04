@@ -31,19 +31,4 @@ public class PathsTest{
 		assertTrue(predicate);
 	}
 
-	@Test
-	public void paths_tell_if_the_city_no_present_in_data_base(){
-	 	Map<String,List<String>> db = DataBase.initDataBase();
-		assertEquals(isPresent.city(db,"Singapore"),true);
-	}
-	@Test
-	public void paths_tell_if_the_city_no_present_in_data_base_01(){
-	 	Map<String,List<String>> db = DataBase.initDataBase();
-		assertEquals(isPresent.city(db,"Stockholm"),false);
-	}
-	@Test
-	public void paths_tell_if_the_city_no_present_in_data_base_02(){
-	 	Map<String,List<String>> db = DataBase.initDataBase();
-		assertEquals(isPresent.city(db,"Chennai"),false);
-	}
 }
