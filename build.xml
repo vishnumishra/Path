@@ -1,0 +1,21 @@
+<project name="Path" basedir="." default="runtest">
+    <property name="src"     value="."/>
+
+    <target name="clean">
+        <delete file="*.class"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="."/>
+        <javac srcdir="${src}" destdir="."
+            classpath="../junit-4.10.jar"
+            includeantruntime="yes"   
+        />
+    </target>
+    <target name="runtest" depends="compile">
+        <echo> runing test...........</echo>
+        <java classpath=".;../junit-4.10.jar" classname="org.junit.runner.JUnitCore">
+          <arg value="PathsTest"/>
+        </java>
+    </target>
+</project>
