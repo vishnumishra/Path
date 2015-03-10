@@ -4,23 +4,23 @@ public class DataBase{
 	public static void insert(String src,String dest){
 		ArrayList<String> list = new ArrayList<String>();
 		if(data.containsKey(src)){
-			data.get(src).add(dest);
+			data.get(src).add(0,dest);
 		}
 		else{
-			list.add(dest);
+			list.add(0,dest);
 			data.put(src,list);
 		}
 	}
 
     public static Map<String,ArrayList<String>> getDBFromFile(String fileName){
-        String file = null;
+        String file = "";
         try{
             file = MyReader.readFile(fileName);
         }catch (Exception e){};
         String[] lines = file.trim().split("\n");
-        for(String from : lines){
-          String src = from.split(",")[0];
-          String dest = from.split(",")[1];
+        for(String city : lines){
+          String src = city.split(",")[0];
+          String dest = city.split(",")[1];
           insert(src.trim(), dest.trim());
         }
         return data;

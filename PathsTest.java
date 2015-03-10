@@ -1,5 +1,5 @@
-import java.util.List;
-import java.util.Arrays;
+import java.util.*;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -136,4 +136,40 @@ public class PathsTest{
         String path = p.getPath("Bangalore","Singapore");
         assertEquals("Bangalore==>Singapore",path);
     }
+    @Test
+    public void addInfo_add_the_country_info_with_city(){
+        setUp();
+        List<String> city = new ArrayList<String>();
+        List<String> result;
+        List<String> actual = new ArrayList<String>();
+        actual.add("delhi[India]");
+        ArrayList<String> country = new ArrayList<String>();
+        country.add("India");
+        Map<String,ArrayList<String>> mappedCity = new HashMap<String,ArrayList<String>>();
+        mappedCity.put("delhi",country);
+        city.add("delhi");
+        result = p.addInfo(city,mappedCity);
+        assertArrayEquals(actual.toArray(),result.toArray());
+    }
+    @Test
+    public void addInfo_add_the_country_info_with_multiple_city(){
+        setUp();
+        List<String> city = new ArrayList<String>();
+        List<String> result;
+        List<String> actual = new ArrayList<String>();
+        actual.add("delhi[India]");
+        actual.add("lahore[Pak]");
+        ArrayList<String> country1 = new ArrayList<String>();
+        ArrayList<String> country2 = new ArrayList<String>();
+        country1.add("India");
+        country2.add("Pak");
+        Map<String,ArrayList<String>> mappedCity = new HashMap<String,ArrayList<String>>();
+        mappedCity.put("delhi",country1);
+        mappedCity.put("lahore",country2);
+        city.add("delhi");
+        city.add("lahore");
+        result = p.addInfo(city,mappedCity);
+        assertArrayEquals(actual.toArray(),result.toArray());
+    }
+
 }

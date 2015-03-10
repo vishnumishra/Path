@@ -27,6 +27,7 @@ public class Paths{
     private List<String> path = new ArrayList<String>();
     private List<String> visited = new ArrayList<String>();
     Map<String,ArrayList<String>> db ;
+    Map<String,ArrayList<String>> cities ;
     private boolean hasPath(String src, String dest){
         path.clear();
         ArrayList<String> list = db.get(src);
@@ -57,13 +58,31 @@ public class Paths{
         return reversedList;
     }
 
+    public List<String> addInfo(List<String> cities ,Map<String,ArrayList<String>> countryInfo){
+//        System.out.println(cities+""+countryInfo);
+        List<String> result =new ArrayList<String>();
+        String country = "";
+        for (String city:cities){
+            if(countryInfo.containsKey(city)){
+                country =  countryInfo.get(city).get(0);
+//                System.out.println("country>>>>>>>>>"+country);
+            }
+            result.add(city+"["+country+"]");
+        }
+        return result;
+    }
     public String getPath(String src,String dest) {
         List<String> result;
+        List<String> cityWithCountry;
+        String routes;
         result = hasPath(src, dest) ? reverseList(path) : hasPath(dest, src) ? path : null;
+//        System.out.println(cities);
         if(result != null){
             result.add(0,src);
             result.add(dest);
-          return String.join("==>",result);
+            cityWithCountry = (cities != null)?addInfo(result,cities):result;
+            routes = String.join("==>",cityWithCountry);
+            return routes;
         }
         return "No route find";
     }
