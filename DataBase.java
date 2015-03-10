@@ -1,7 +1,7 @@
 import java.util.*;
 public class DataBase{
-	static Map<String,ArrayList<String>> data = new  HashMap<String,ArrayList<String>>();
-	public static void insert(String src,String dest){
+	Map<String,ArrayList<String>> data = new  HashMap<String,ArrayList<String>>();
+	public void insert(String src,String dest){
 		ArrayList<String> list = new ArrayList<String>();
 		if(data.containsKey(src)){
 			data.get(src).add(0,dest);
@@ -12,7 +12,7 @@ public class DataBase{
 		}
 	}
 
-    public static Map<String,ArrayList<String>> getDBFromFile(String fileName){
+    public Map<String,ArrayList<String>> getDBFromFile(String fileName){
         String file = "";
         try{
             file = MyReader.readFile(fileName);

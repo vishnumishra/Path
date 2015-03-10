@@ -14,8 +14,9 @@ public class Result{
         System.out.println("pathFile: "+pathFile+" citiesFile: "+citiesFile);
         if(fileIndex > 0 && !new File(pathFile).exists()) throw new Exception("No dataBase"+pathFile+" is found");
         if(citiesFileIndex > 0 && !new File(citiesFile).exists()) throw new Exception("No dataBase"+citiesFile+" is found");
-        paths.db = (fileIndex > 0)?DataBase.getDBFromFile(pathFile):MyDataBase.defaultDataBase();
-        paths.cities = (citiesFileIndex > 0)?DataBase.getDBFromFile(citiesFile):null;
+        paths.db = (fileIndex > 0)?(new DataBase()).getDBFromFile(pathFile):MyDataBase.defaultDataBase();
+//        paths.db.clear();
+        paths.cities = (citiesFileIndex > 0)?(new DataBase()).getDBFromFile(citiesFile):null;
         if(!isPresent.city(paths.db,src)) return  " No city named +\""+src+"\" in database";
         if(!isPresent.city(paths.db,dest)) return   " No city named +\""+dest+"\" in database";
         return paths.getPath(src,dest);
