@@ -1,3 +1,5 @@
+package src.com.company;
+
 import java.io.*;
 
 public class MyReader{
